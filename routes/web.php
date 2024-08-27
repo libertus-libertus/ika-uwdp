@@ -22,3 +22,4 @@ Route::get('/home', function () {
 });
 
 Route::resource('/category', \App\Http\Controllers\Backend\CategoryController::class);
+Route::resource('/tag', \App\Http\Controllers\Backend\TagsController::class);
