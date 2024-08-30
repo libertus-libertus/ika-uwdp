@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tags;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -42,6 +44,7 @@ class PostController extends Controller
             'category_id' => $request->category_id,
             'contents' => $request->contents,
             'image' => 'uploads/posts/'.$newImage,
+            'user_id' => Auth::id()
         ]);
 
         // Simpan multiple

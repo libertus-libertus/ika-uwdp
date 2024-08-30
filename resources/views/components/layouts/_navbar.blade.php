@@ -29,8 +29,8 @@
     </li>
     <li class="dropdown"><a href="#" data-toggle="dropdown"
         class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-        {{ Auth()->user()->name }}
-        <img alt="image" src="{{ asset('assets/img/avatar/avatar-1.png') }}" class="rounded-circle mr-1">
+        Selamat Datang &mdash; {{ Auth()->user()->name }}
+        <img alt="image" src="{{ asset('backend/img/no_image.jpg') }}" class="rounded-circle mr-1">
       </a>
       <div class="dropdown-menu dropdown-menu-right">
         <div class="dropdown-title">{{ Auth()->user()->email }}</div> <hr>

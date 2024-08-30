@@ -1,5 +1,5 @@
 @extends('components._admin')
-@section('title', 'Postingan / Berita')
+@section('title', 'Data Anggota')
 
 @section('content')
 
@@ -17,8 +17,8 @@
   <!-- .end-sukses -->
 
   <!-- Tombol Tambah -->
-  <a href="{{ route('post.create') }}" class="btn btn-info btn-sm btn-flat">
-    <i class="fa fa-plus-circle"> Tambah Post</i>
+  <a href="{{ route('user.create') }}" class="btn btn-primary btn-sm btn-flat">
+    <i class="fa fa-plus-circle"> Tambah Anggota</i>
   </a>
   <!-- .end-tombol-tambah -->
 
@@ -27,41 +27,40 @@
     <thead>
       <tr>
         <th style="width: 45px">No.</th>
-        <th>Judul</th>
-        <th>Kategori</th>
-        <th>Daftar Tags</th>
-        <th>Author</th>
-        <th>Thumbnails</th>
+        <th style="width: 45%">Nama Anggota</th>
+        <th>Email</th>
+        <th class="text-center">Hak Akses</th>
         <th class="text-center">Aksi</th>
       </tr>
     </thead>
     <tbody>
-      @foreach ($posts as $item)
+      @foreach ($users as $item)
         <tr>
           <td>{{ $loop->iteration }}</td>
-          <td>{{ $item->title }}</td>
-          <td>{{ $item->category->name }}</td>
-          <td>
-            @foreach ($item->tags as $tag)
-                <span class="badge bg-info text-white" style="font-size: 10px">{{ $tag->name }}</span>
-            @endforeach
+          <td>{{ $item->name }}</td>
+          <td>{{ $item->email }}</td>
+          <td class="text-center">
+            @if ($item->level)
+              <span class="badge bg-primary text-white" style="font-size: 10px">Admin</span>
+            @else
+                <span class="badge bg-secondary text-dark" style="font-size: 10px">Anggota</span>
+            @endif
           </td>
-          <td>{{ $item->users->name }}</td>
-          <td><img src="{{ asset($item->image) }}" class="img-fluid" width="120"></td>
           <td class="text-center">
             <div class="btn-group">
-              <a href="{{ route('post.edit', $item->id) }}" class="btn btn-warning btn-sm btn-flat">
+              <a href="{{ route('user.edit', $item->id) }}" class="btn btn-warning btn-sm btn-flat">
                 <i class="fa fa-edit"></i>
                 Ubah
               </a>
-              <form action="{{ route('post.destroy', $item->id) }}" method="post" class="d-inline" onsubmit="return confirm('Yakin mau menghapus data ini?')">
+              <form action="{{ route('user.destroy', $item->id) }}" method="post" class="d-inline"
+                onsubmit="return confirm('Yakin mau menghapus data ini?')">
                 @csrf
                 @method('delete')
                 <button type="submit" class="btn btn-danger btn-sm btn-flat">
-                    <i class="fa fa-times-circle"></i>
-                    Hapus
+                  <i class="fa fa-times-circle"></i>
+                  Hapus
                 </button>
-            </form>
+              </form>
             </div>
           </td>
         </tr>
@@ -71,7 +70,7 @@
   <!-- .end-datatabel -->
 
   <!-- Manual Pagination-->
-  {{ $posts->links() }}
+  {{ $users->links() }}
   <!-- .end-manual-pagination-->
 
 @endsection

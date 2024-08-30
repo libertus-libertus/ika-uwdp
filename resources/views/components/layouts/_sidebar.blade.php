@@ -1,6 +1,8 @@
 <aside id="sidebar-wrapper">
-  <div class="sidebar-brand">
-    <a href="{{ route('home') }}"><strong>IKA UWDP</strong></a>
+  <div class="sidebar-brand my-2">
+    <a href="{{ route('home') }}" class="logo-link">
+        <img src="{{ asset('backend/img/logo.png') }}" width="120" class="w-25">
+    </a>
   </div>
   <div class="sidebar-brand sidebar-brand-sm">
     <a href="{{ route('home') }}">IKA</a>
@@ -26,9 +28,12 @@
     <li class="nav-item">
       <a class="nav-link" href="{{ route('tag.index') }}"><i class="fas fa-bookmark"></i> <span>Tags</span></a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ route('user.index') }}"><i class="fas fa-users"></i> <span>Anggota</span></a>
+    </li>
     <li class="menu-header">Pengaturan</li>
     <li class="nav-item">
-      <a class="nav-link" href="blank.html"><i class="fas fa-cog"></i> <span>Setting</span></a>
+      <a class="nav-link" href="#" onclick="confirm('Coming soon bro!')"><i class="fas fa-cog"></i> <span>Setting</span></a>
     </li>
   </ul>
 </aside>

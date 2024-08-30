@@ -15,10 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
-
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [\App\Http\Controllers\Backend\BlogController::class, 'index'])->name('index');
 
 Route::group(['middleware' => 'auth'], function() {
     // Dashboard
@@ -32,4 +29,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/post/restore/{id}', [\App\Http\Controllers\Backend\PostController::class, 'restore'])->name('post.restore');
     Route::delete('/post/forceDelete/{id}', [\App\Http\Controllers\Backend\PostController::class, 'forceDelete'])->name('post.forceDelete');
     Route::resource('/post', \App\Http\Controllers\Backend\PostController::class);
+
+    // anggota
+    Route::resource('/user', \App\Http\Controllers\Backend\UserController::class);
 });
