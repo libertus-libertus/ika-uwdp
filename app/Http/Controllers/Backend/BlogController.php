@@ -12,4 +12,10 @@ class BlogController extends Controller
         $data = $post->orderBy('created_at', 'desc')->get();
         return view('blog', compact('data'));
     }
+
+    public function single_post($slug)
+    {
+        $data = Post::where('slug', $slug)->get();
+        return view('pages.blog.single_post', compact('data'));
+    }
 }

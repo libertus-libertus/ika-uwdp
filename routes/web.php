@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
-Route::get('/', [\App\Http\Controllers\Backend\BlogController::class, 'index'])->name('index');
+Route::get('/', [\App\Http\Controllers\Backend\BlogController::class, 'index'])->name('blog');
+Route::get('/single-post/{slug}', [\App\Http\Controllers\Backend\BlogController::class, 'single_post'])->name('post.single.page');
 
 Route::group(['middleware' => 'auth'], function() {
     // Dashboard
