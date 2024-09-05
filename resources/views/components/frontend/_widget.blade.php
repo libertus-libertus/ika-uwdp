@@ -1,125 +1,55 @@
-<div class="col-md-4">
+<div class="widget-blocks">
+  <div class="row">
+    <div class="col-lg-12 col-md-6">
+      <div class="widget">
+        <h2 class="section-title mb-3">Recommended</h2>
+        <div class="widget-body">
+          <div class="widget-list">
+            @foreach ($widget as $item)
+              <article class="card mb-4">
+                <div class="card-image">
+                  <div class="post-info"> <span class="text-uppercase">{{ $item->created_at->diffForHumans() }}</span>
+                  </div>
+                  <img loading="lazy" decoding="async" src="{{ asset($item->image) }}" alt="Post Thumbnail"
+                    class="w-100">
+                </div>
+                <div class="card-body px-0 pb-1">
+                  <h3><a class="post-title post-title-sm"
+                      href="{{ route('post.single.page', $item->slug) }}">{{ $item->title }}</a></h3>
+                  <p class="card-text">{!! Str::limit($item->contents, '100', '...') !!}</p>
+                </div>
+              </article>
+            @endforeach
 
-    <!-- social widget -->
-    <div class="aside-widget">
-      <div class="section-title">
-        <h2 class="title">Social Media</h2>
-      </div>
-      <div class="social-widget">
-        <ul>
-          <li>
-            <a href="#" class="social-facebook">
-              <i class="fa fa-facebook"></i>
-              <span>21.2K<br>Followers</span>
-            </a>
-          </li>
-          <li>
-            <a href="#" class="social-twitter">
-              <i class="fa fa-twitter"></i>
-              <span>10.2K<br>Followers</span>
-            </a>
-          </li>
-          <li>
-            <a href="#" class="social-google-plus">
-              <i class="fa fa-google-plus"></i>
-              <span>5K<br>Followers</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <!-- /social widget -->
-
-    <!-- category widget -->
-    <div class="aside-widget">
-      <div class="section-title">
-        <h2 class="title">Categories</h2>
-      </div>
-      <div class="category-widget">
-        <ul>
-          <li><a href="#">Lifestyle <span>451</span></a></li>
-          <li><a href="#">Fashion <span>230</span></a></li>
-          <li><a href="#">Technology <span>40</span></a></li>
-          <li><a href="#">Travel <span>38</span></a></li>
-          <li><a href="#">Health <span>24</span></a></li>
-        </ul>
-      </div>
-    </div>
-    <!-- /category widget -->
-
-    <!-- newsletter widget -->
-    <div class="aside-widget">
-      <div class="section-title">
-        <h2 class="title">Newsletter</h2>
-      </div>
-      <div class="newsletter-widget">
-        <form>
-          <p>Nec feugiat nisl pretium fusce id velit ut tortor pretium.</p>
-          <input class="input" name="newsletter" placeholder="Enter Your Email">
-          <button class="primary-button">Subscribe</button>
-        </form>
-      </div>
-    </div>
-    <!-- /newsletter widget -->
-
-    <!-- post widget -->
-    <div class="aside-widget">
-      <div class="section-title">
-        <h2 class="title">Popular Posts</h2>
-      </div>
-      <!-- post -->
-      <div class="post post-widget">
-        <a class="post-img" href="blog-post.html"><img src="frontend/img/widget-3.jpg" alt=""></a>
-        <div class="post-body">
-          <div class="post-category">
-            <a href="category.html">Lifestyle</a>
+            @foreach ($posts as $item)
+              <div class="media-body">
+                <h3><a class="post-title post-title-sm"
+                    href="{{ route('post.single.page', $item->slug) }}">{{ $item->title }}</a></h3>
+                <p class="mb-0 small">{!! Str::limit($item->contents, '100', '...') !!}</p>
+              </div>
+            @endforeach
           </div>
-          <h3 class="post-title"><a href="blog-post.html">Ne bonorum praesent cum, labitur persequeris
-              definitionem quo cu?</a></h3>
         </div>
       </div>
-      <!-- /post -->
-
-      <!-- post -->
-      <div class="post post-widget">
-        <a class="post-img" href="blog-post.html"><img src="frontend/img/widget-2.jpg" alt=""></a>
-        <div class="post-body">
-          <div class="post-category">
-            <a href="category.html">Technology</a>
-            <a href="category.html">Lifestyle</a>
-          </div>
-          <h3 class="post-title"><a href="blog-post.html">Mel ut impetus suscipit tincidunt. Cum id ullum
-              laboramus persequeris.</a></h3>
-        </div>
-      </div>
-      <!-- /post -->
-
-      <!-- post -->
-      <div class="post post-widget">
-        <a class="post-img" href="blog-post.html"><img src="frontend/img/widget-4.jpg" alt=""></a>
-        <div class="post-body">
-          <div class="post-category">
-            <a href="category.html">Health</a>
-          </div>
-          <h3 class="post-title"><a href="blog-post.html">Postea senserit id eos, vivendo periculis ei qui</a>
-          </h3>
-        </div>
-      </div>
-      <!-- /post -->
-
-      <!-- post -->
-      <div class="post post-widget">
-        <a class="post-img" href="blog-post.html"><img src="frontend/img/widget-5.jpg" alt=""></a>
-        <div class="post-body">
-          <div class="post-category">
-            <a href="category.html">Health</a>
-            <a href="category.html">Lifestyle</a>
-          </div>
-          <h3 class="post-title"><a href="blog-post.html">Sed ut perspiciatis, unde omnis iste natus error
-              sit</a></h3>
-        </div>
-      </div>
-      <!-- /post -->
     </div>
-    <!-- /post widget -->
+    <div class="col-lg-12 col-md-6">
+      <div class="widget">
+        <h2 class="section-title mb-3">Categories</h2>
+        <div class="widget-body">
+          <ul class="widget-list">
+            @foreach ($categories as $item)
+              <li>
+                <a href="{{ route('posts.by.category', $item->id) }}">{{ $item->name }}
+                  @if ($item->posts->count() > 0)
+                    <span class="ml-auto">({{ $item->posts->count() }})</span>
+                  @else
+                  @endif
+                </a>
+              </li>
+            @endforeach
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
+</div>

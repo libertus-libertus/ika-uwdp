@@ -1,105 +1,113 @@
-@extends('components.frontend._content')
+  <!DOCTYPE html>
 
-@section('main-content')
-<div class="col-md-8 hot-post-left">
+  <html lang="en-us">
 
-      <!-- post -->
-      <div class="post post-thumb">
-        <a class="post-img" href="blog-post.html"><img src="{{ asset('frontend/img/hot-post-1.jpg') }}" alt=""></a>
-        <div class="post-body">
-          <div class="post-category">
-            <a href="category.html">Lifestyle</a>
-          </div>
-          <h3 class="post-title title-lg"><a href="blog-post.html">Postea senserit id eos, vivendo periculis ei
-              qui</a></h3>
-          <ul class="post-meta">
-            <li><a href="author.html">John Doe</a></li>
-            <li>20 April 2018</li>
-          </ul>
-        </div>
-      </div>
-      <!-- /post -->
-    </div>
-    <div class="col-md-4 hot-post-right">
-      <!-- post -->
-      <div class="post post-thumb">
-        <a class="post-img" href="blog-post.html"><img src="{{ asset('frontend/img/hot-post-2.jpg') }}"
-            alt=""></a>
-        <div class="post-body">
-          <div class="post-category">
-            <a href="category.html">Lifestyle</a>
-          </div>
-          <h3 class="post-title"><a href="blog-post.html">Sed ut perspiciatis, unde omnis iste natus error
-              sit</a></h3>
-          <ul class="post-meta">
-            <li><a href="author.html">John Doe</a></li>
-            <li>20 April 2018</li>
-          </ul>
-        </div>
-      </div>
-      <!-- /post -->
+    <head>
+      <meta charset="utf-8">
+      <title>IKA &mdash; Universitas Widya Dharma Pontianak</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+      <meta name="description" content="This is meta description">
+      <meta name="author" content="Themefisher">
+      <link rel="shortcut icon" href="{{ asset('frontend/images/logo-ika.png') }}" type="image/x-icon">
+      <link rel="icon" href="{{ asset('frontend/images/logo-ika.png') }}" type="image/x-icon">
+      <!-- theme meta -->
+      <meta name="theme-name" content="reporter" />
+      <!-- # Google Fonts -->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Neuton:wght@700&family=Work+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
 
-      <!-- post -->
-      <div class="post post-thumb">
-        <a class="post-img" href="blog-post.html"><img src="{{ asset('frontend/img/hot-post-3.jpg') }}"
-            alt=""></a>
-        <div class="post-body">
-          <div class="post-category">
-            <a href="category.html">Fashion</a>
-            <a href="category.html">Lifestyle</a>
-          </div>
-          <h3 class="post-title"><a href="blog-post.html">Mel ut impetus suscipit tincidunt. Cum id ullum
-              laboramus persequeris.</a></h3>
-          <ul class="post-meta">
-            <li><a href="author.html">John Doe</a></li>
-            <li>20 April 2018</li>
-          </ul>
-        </div>
-      </div>
-      <!-- /post -->
-    </div>
-  <!-- /container -->
-  </div>
-  <!-- /SECTION -->
+      <!-- # CSS Plugins -->
+      <link rel="stylesheet" href="{{ asset('frontend/plugins/bootstrap/bootstrap.min.css') }}">
 
-  <!-- SECTION -->
-  <div class="section">
-    <!-- container -->
-    <div class="container">
-      <!-- row -->
-      <div class="row">
-        <div class="col-md-8">
-          <!-- row -->
-          <div class="row">
-            <div class="col-md-12">
-              <div class="section-title">
-                <h2 class="title">Postingan Terbaru</h2>
+      <!-- # Main Style Sheet -->
+      <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
+    </head>
+
+    <body>
+
+      @include('components.frontend._header')
+
+      @include('components.frontend._carousel')
+
+      <main>
+        <section class="section">
+          <div class="container">
+            <div class="row no-gutters-lg">
+              <div class="col-12">
+                <h2 class="section-title">Latest Articles</h2>
               </div>
-            </div>
-            <!-- post -->
-            @foreach ($data as $post_terbaru)
-              <div class="col-md-6">
-                <div class="post">
-                  <a class="post-img" href="{{ route('post.single.page', $post_terbaru->slug) }}"><img src="{{ $post_terbaru->image }}"
-                      style="height: 250px !important;"></a>
-                  <div class="post-body">
-                    <div class="post-category">
-                      <a href="#">{{ $post_terbaru->category->name }}</a>
+              <div class="col-lg-8 mb-5 mb-lg-0">
+                <div class="row">
+
+                  @foreach ($posts as $item)
+                    <div class="col-12 mb-4">
+                      <article class="card article-card">
+                        <a href="{{ route('post.single.page', $item->slug) }}">
+                          <div class="card-image">
+                            <div class="post-info"> <span
+                                class="text-uppercase">{{ $item->created_at->format('d F Y') }}</span>
+                              <span class="text-uppercase">{{ $item->created_at->diffForHumans() }}</span>
+                            </div>
+                            <img loading="lazy" decoding="async" src="{{ asset($item->image) }}" alt="Post Thumbnail"
+                              class="w-100">
+                          </div>
+                        </a>
+                        <div class="card-body px-0 pb-1">
+                          <ul class="post-meta mb-2">
+                            <li> <a href="#!">{{ $item->category->name }}</a>
+                            </li>
+                          </ul>
+                          <h2 class="h1"><a class="post-title"
+                              href="{{ route('post.single.page', $item->slug) }}">{{ $item->title }}</a></h2>
+                          <p class="card-text">{!! Str::limit($item->contents, 300, '...') !!}</p>
+                          @if (Str::limit($item->contents > 300))
+                            <div class="content">
+                              <a class="read-more-btn" href="{{ route('post.single.page', $item->slug) }}">Read Full
+                                Article</a>
+                            </div>
+                          @endif
+                        </div>
+                      </article>
                     </div>
-                    <h3 class="post-title"><a href="{{ route('post.single.page', $post_terbaru->slug) }}">{{ $post_terbaru->title }}</a></h3>
-                    <ul class="post-meta">
-                      <li><a href="#">{{ $post_terbaru->users->name }}</a></li>
-                      <li>{{ $post_terbaru->created_at->diffForHumans() }}</li>
-                    </ul>
+                  @endforeach
+
+                  <div class="col-12">
+                    <div class="row text-center">
+                      <div class="col-12">
+                        <a href="{{ route('post.list.page') }}" class="page-item active">
+                            Load more
+                        </a>
+                      </div>
+                    </div>
                   </div>
+
+
                 </div>
               </div>
-            @endforeach
+
+              <!-- Widgets -->
+              <div class="col-lg-4">
+                @include('components.frontend._widget')
+              </div>
+            </div>
           </div>
-          <!-- /row -->
+        </section>
+      </main>
+
+      <!-- Footer -->
+      @include('components.frontend._footer')
 
 
-        </div>
-        <!-- /row -->
-      </div>
-      @endsection
+      <!-- # JS Plugins -->
+      <script src="{{ asset('frontend/plugins/jquery/jquery.min.js') }}"></script>
+      <script src="{{ asset('frontend/plugins/bootstrap/bootstrap.min.js') }}"></script>
+
+      <!-- Main Script -->
+      <script src="{{ asset('frontend/js/script.js') }}"></script>
+
+    </body>
+
+  </html>

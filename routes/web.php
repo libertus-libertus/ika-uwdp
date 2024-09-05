@@ -15,8 +15,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
+
 Route::get('/', [\App\Http\Controllers\Backend\BlogController::class, 'index'])->name('blog');
 Route::get('/single-post/{slug}', [\App\Http\Controllers\Backend\BlogController::class, 'single_post'])->name('post.single.page');
+Route::get('/list-post', [\App\Http\Controllers\Backend\BlogController::class, 'list_post'])->name('post.list.page');
+Route::get('/category/{id}', [\App\Http\Controllers\Backend\BlogController::class, 'postsByCategory'])->name('posts.by.category');
 
 Route::group(['middleware' => 'auth'], function() {
     // Dashboard

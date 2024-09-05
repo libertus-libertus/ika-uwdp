@@ -29,6 +29,8 @@
       gtag('config', 'UA-94034622-3');
     </script>
     <!-- /END GA -->
+
+    @yield('css')
   </head>
 
   <body>
@@ -84,6 +86,8 @@
     <!-- Template JS File -->
     <script src="{{ asset('backend/js/scripts.js') }}"></script>
     <script src="{{ asset('backend/js/custom.js') }}"></script>
+
+    @yield('js')
   </body>
 
 </html>

@@ -10,4 +10,17 @@ class Category extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'slug'];
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    /**
+     * Get the route key for the model.
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 }

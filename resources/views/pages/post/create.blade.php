@@ -1,6 +1,10 @@
 @extends('components._admin')
 @section('title', 'Tambah Post')
 
+@section('css')
+
+@endsection
+
 @section('content')
 
   <div class="section-body">
@@ -71,4 +75,11 @@
     </div>
   </div>
 
+@endsection
+
+@section('js')
+<script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('contents');
+</script>
 @endsection
