@@ -13,6 +13,9 @@
       <a href="{{ route('home') }}" class="nav-link">
         <i class="fas fa-fire"></i><span>Dashboard</span>
       </a>
+      <a href="{{ url('/') }}" class="nav-link" target="_blank">
+        <i class="fas fa-arrow-right"></i><span>Web IKA</span>
+      </a>
     </li>
     <li class="menu-header">Data Master</li>
     <li class="dropdown">

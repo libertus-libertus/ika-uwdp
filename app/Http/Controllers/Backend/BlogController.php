@@ -29,6 +29,13 @@ class BlogController extends Controller
         return view('pages.blog.single_post', compact('data', 'posts', 'datas', 'widget', 'categories'));
     }
 
+    public function list_post(Post $post)
+    {
+        $data_post = $post->paginate(5);
+        $categories = Category::all();
+        return view('pages.blog.list_post', compact('categories', 'data_post'));
+    }
+
     public function postsByCategory($id)
     {
         // Mengambil kategori berdasarkan ID

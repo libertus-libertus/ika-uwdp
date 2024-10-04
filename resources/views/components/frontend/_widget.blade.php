@@ -8,14 +8,13 @@
             @foreach ($widget as $item)
               <article class="card mb-4">
                 <div class="card-image">
-                  <div class="post-info"> <span class="text-uppercase">{{ $item->created_at->diffForHumans() }}</span>
+                  <div class="post-info">
+                    <span class="text-uppercase">{{ $item->created_at->diffForHumans() }}</span>
                   </div>
-                  <img loading="lazy" decoding="async" src="{{ asset($item->image) }}" alt="Post Thumbnail"
-                    class="w-100">
+                  <img loading="lazy" decoding="async" src="{{ asset($item->image) }}" alt="Post Thumbnail" class="w-100">
                 </div>
                 <div class="card-body px-0 pb-1">
-                  <h3><a class="post-title post-title-sm"
-                      href="{{ route('post.single.page', $item->slug) }}">{{ $item->title }}</a></h3>
+                  <h3><a class="post-title post-title-sm" href="{{ route('post.single.page', $item->slug) }}">{{ $item->title }}</a></h3>
                   <p class="card-text">{!! Str::limit($item->contents, '100', '...') !!}</p>
                 </div>
               </article>
